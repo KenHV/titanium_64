@@ -41,7 +41,7 @@ TARGET_CPU_CORTEX_A53 := true
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_KERNEL := false
 BOOTLOADER_GCC_VERSION := arm-eabi-4.8
-BOOTLOADER_PLATFORM := titanium # use titanium LK configuration
+BOOTLOADER_PLATFORM := msmtitanium # use titanium LK configuration
 MALLOC_IMPL := dlmalloc
 
 TARGET_USERIMAGES_USE_EXT4 := true
