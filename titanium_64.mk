@@ -197,3 +197,6 @@ endif
 # Sensor HAL conf file
  PRODUCT_COPY_FILES += \
      device/qcom/titanium_64/sensors/hals.conf:system/etc/sensors/hals.conf
+
+# Disable Verity boot feature
+PRODUCT_SUPPORTS_VERITY := false
