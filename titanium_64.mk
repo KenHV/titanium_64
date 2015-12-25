@@ -1,6 +1,7 @@
 DEVICE_PACKAGE_OVERLAYS := device/qcom/titanium_64/overlay
 
 TARGET_USES_QCOM_BSP := true
+BOARD_HAVE_QCOM_FM := true
 # Add QC Video Enhancements flag
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 TARGET_USES_NQ_NFC := false
@@ -90,6 +91,9 @@ PRODUCT_COPY_FILES += \
     device/qcom/titanium_32/audio_platform_info_extcodec.xml:system/etc/audio_platform_info_extcodec.xml \
     device/qcom/titanium_64/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt
 
+# MIDI feature
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.midi.xml:system/etc/permissions/android.software.midi.xml
 
 #ANT+ stack
 PRODUCT_PACKAGES += \
@@ -180,3 +184,11 @@ endif
 
 # Disable Verity boot feature
 PRODUCT_SUPPORTS_VERITY := false
+
+# Reduce client buffer size for fast audio output tracks
+PRODUCT_PROPERTY_OVERRIDES += \
+     af.fast_track_multiplier=1
+
+# Low latency audio buffer size in frames
+PRODUCT_PROPERTY_OVERRIDES += \
+    audio_hal.period_size=192
