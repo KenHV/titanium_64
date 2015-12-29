@@ -20,9 +20,9 @@ endif
 PRODUCT_COPY_FILES += device/qcom/titanium_64/whitelistedapps.xml:system/etc/whitelistedapps.xml
 
 PRODUCT_PROPERTY_OVERRIDES += \
-           dalvik.vm.heapgrowthlimit=128m \
            dalvik.vm.heapminfree=4m \
            dalvik.vm.heapstartsize=16m
+$(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product, device/qcom/common/common64.mk)
 
 PRODUCT_NAME := titanium_64
