@@ -75,6 +75,7 @@ PRODUCT_COPY_FILES += \
     device/qcom/titanium_32/mixer_paths_qrd_skui.xml:system/etc/mixer_paths_qrd_skui.xml \
     device/qcom/titanium_32/mixer_paths_qrd_skuhf.xml:system/etc/mixer_paths_qrd_skuhf.xml \
     device/qcom/titanium_32/mixer_paths_qrd_skum.xml:system/etc/mixer_paths_qrd_skum.xml \
+    device/qcom/titanium_32/mixer_paths_qrd_sku3.xml:system/etc/mixer_paths_qrd_sku3.xml \
     device/qcom/titanium_32/mixer_paths_wcd9330.xml:system/etc/mixer_paths_wcd9330.xml \
     device/qcom/titanium_32/mixer_paths_wcd9306.xml:system/etc/mixer_paths_wcd9306.xml \
     device/qcom/titanium_32/mixer_paths_wcd9335.xml:system/etc/mixer_paths_wcd9335.xml \
