@@ -111,6 +111,9 @@ TARGET_PER_MGR_ENABLED := true
 #Enable HW based full disk encryption
 TARGET_HW_DISK_ENCRYPTION := false
 
+#Enabling IMS Feature
+TARGET_USES_IMS := TRUE
+
 #Enable SW based full disk encryption
 TARGET_SWV8_DISK_ENCRYPTION := true
 
