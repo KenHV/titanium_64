@@ -185,7 +185,7 @@ endif
      device/qcom/titanium_64/sensors/hals.conf:system/etc/sensors/hals.conf
 
 # Disable Verity boot feature
-PRODUCT_SUPPORTS_VERITY := false
+PRODUCT_SUPPORTS_VERITY := true
 
 # Reduce client buffer size for fast audio output tracks
 PRODUCT_PROPERTY_OVERRIDES += \
