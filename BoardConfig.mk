@@ -109,13 +109,11 @@ USE_SENSOR_MULTI_HAL := true
 TARGET_PER_MGR_ENABLED := true
 
 #Enable HW based full disk encryption
-TARGET_HW_DISK_ENCRYPTION := false
+TARGET_HW_DISK_ENCRYPTION := true
+TARGET_CRYPTFS_HW_PATH := device/qcom/common/cryptfs_hw
 
 #Enabling IMS Feature
 TARGET_USES_IMS := TRUE
-
-#Enable SW based full disk encryption
-TARGET_SWV8_DISK_ENCRYPTION := true
 
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 
