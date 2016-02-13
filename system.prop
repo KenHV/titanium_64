@@ -155,6 +155,9 @@ persist.debug.wfd.enable=1
 #property to enable VDS WFD solution
 persist.hwc.enable_vds=1
 
+#selects CoreSight configuration to enable
+persist.debug.coresight.config=stm-events
+
 #property for vendor specific library
 ro.vendor.gt_library=libqti-gt.so
 
@@ -218,3 +221,6 @@ ro.cutoff_voltage_mv=3200
 
 #set device emmc size
 ro.emmc_size=16GB
+
+#force HAL1 for below packages
+camera.hal1.packagelist=com.skype.raider,com.google.android.talk
