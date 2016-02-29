@@ -4,7 +4,8 @@
 #
 
 TARGET_BOARD_PLATFORM := titanium
-TARGET_BOOTLOADER_BOARD_NAME := titanium
+# This value will be shown on fastboot menu
+TARGET_BOOTLOADER_BOARD_NAME := QC_Reference_Phone
 
 TARGET_COMPILE_WITH_MSM_KERNEL := true
 TARGET_KERNEL_APPEND_DTB := true
