@@ -3,15 +3,15 @@
 # Product-specific compile-time definitions.
 #
 
-TARGET_BOARD_PLATFORM := titanium
+TARGET_BOARD_PLATFORM := msm8953
 # This value will be shown on fastboot menu
-TARGET_BOOTLOADER_BOARD_NAME := QC_Reference_Phone
+TARGET_BOOTLOADER_BOARD_NAME := msm8953
 
 TARGET_COMPILE_WITH_MSM_KERNEL := true
 TARGET_KERNEL_APPEND_DTB := true
 BOARD_USES_GENERIC_AUDIO := true
 
--include $(QCPATH)/common/titanium_64/BoardConfigVendor.mk
+-include $(QCPATH)/common/msm8953_64/BoardConfigVendor.mk
 
 # bring-up overrides
 BOARD_USES_GENERIC_AUDIO := true
@@ -42,7 +42,7 @@ TARGET_CPU_CORTEX_A53 := true
 TARGET_NO_BOOTLOADER := false
 TARGET_NO_KERNEL := false
 BOOTLOADER_GCC_VERSION := arm-eabi-4.8
-BOOTLOADER_PLATFORM := msmtitanium # use titanium LK configuration
+BOOTLOADER_PLATFORM := msm8953 # use msm8953 LK configuration
 MALLOC_IMPL := dlmalloc
 
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -91,7 +91,7 @@ MAX_EGL_CACHE_KEY_SIZE := 12*1024
 # of the device.
 MAX_EGL_CACHE_SIZE := 2048*1024
 
-BOARD_EGL_CFG := device/qcom/titanium_64/egl.cfg
+BOARD_EGL_CFG := device/qcom/msm8953_64/egl.cfg
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 # Add NON-HLOS files for ota upgrade
 ADD_RADIO_FILES := true
