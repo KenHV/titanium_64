@@ -50,11 +50,12 @@ TARGET_USE_MDTP := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x04000000
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x04000000
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2684354560
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 10737418240
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 10536091648
 BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_OEMIMAGE_PARTITION_SIZE := 268435456
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
 # Enable suspend during charger mode
@@ -71,7 +72,7 @@ TARGET_USES_NEW_ION_API :=true
 TARGET_USES_QCOM_BSP := true
 TARGET_NO_RPC := true
 
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_hsl_uart,0x78af000 zcache.enabled=1
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_hsl_uart,0x78af000
 BOARD_KERNEL_SEPARATED_DT := true
 
 BOARD_KERNEL_BASE        := 0x80000000
