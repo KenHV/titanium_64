@@ -3,14 +3,15 @@
 # Product-specific compile-time definitions.
 #
 
-TARGET_BOARD_PLATFORM := titanium
-TARGET_BOOTLOADER_BOARD_NAME := titanium
+TARGET_BOARD_PLATFORM := msm8953
+# This value will be shown on fastboot menu
+TARGET_BOOTLOADER_BOARD_NAME := msm8953
 
 TARGET_COMPILE_WITH_MSM_KERNEL := true
 TARGET_KERNEL_APPEND_DTB := true
 BOARD_USES_GENERIC_AUDIO := true
 
--include $(QCPATH)/common/titanium_64/BoardConfigVendor.mk
+-include $(QCPATH)/common/msm8953_64/BoardConfigVendor.mk
 
 # bring-up overrides
 BOARD_USES_GENERIC_AUDIO := true
@@ -41,7 +42,7 @@ TARGET_CPU_CORTEX_A53 := true
 TARGET_NO_BOOTLOADER := false
 TARGET_NO_KERNEL := false
 BOOTLOADER_GCC_VERSION := arm-eabi-4.8
-BOOTLOADER_PLATFORM := msmtitanium # use titanium LK configuration
+BOOTLOADER_PLATFORM := msm8953 # use msm8953 LK configuration
 MALLOC_IMPL := dlmalloc
 
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -49,15 +50,19 @@ TARGET_USE_MDTP := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x04000000
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x04000000
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2684354560
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 10737418240
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 10536091648
 BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_OEMIMAGE_PARTITION_SIZE := 268435456
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
 # Enable suspend during charger mode
 BOARD_CHARGER_ENABLE_SUSPEND := true
+
+# Disable the init blank to avoid flicker
+BOARD_CHARGER_DISABLE_INIT_BLANK := true
 
 # Added to indicate that protobuf-c is supported in this build
 PROTOBUF_SUPPORTED := false
@@ -67,7 +72,7 @@ TARGET_USES_NEW_ION_API :=true
 TARGET_USES_QCOM_BSP := true
 TARGET_NO_RPC := true
 
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_hsl_uart,0x78af000 zcache.enabled=1
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_hsl_uart,0x78af000
 BOARD_KERNEL_SEPARATED_DT := true
 
 BOARD_KERNEL_BASE        := 0x80000000
@@ -90,7 +95,7 @@ MAX_EGL_CACHE_KEY_SIZE := 12*1024
 # of the device.
 MAX_EGL_CACHE_SIZE := 2048*1024
 
-BOARD_EGL_CFG := device/qcom/titanium_64/egl.cfg
+BOARD_EGL_CFG := device/qcom/msm8953_64/egl.cfg
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 # Add NON-HLOS files for ota upgrade
 ADD_RADIO_FILES := true
