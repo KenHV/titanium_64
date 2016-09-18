@@ -45,7 +45,7 @@ TARGET_NO_KERNEL := false
 BOOTLOADER_GCC_VERSION := arm-eabi-4.8
 BOOTLOADER_PLATFORM := msm8953 # use msm8953 LK configuration
 #MALLOC_IMPL := dlmalloc
-MALLOC_SVELTE := true
+#MALLOC_SVELTE := true
 
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x04000000
@@ -75,6 +75,8 @@ TARGET_NO_RPC := true
 
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_hsl_uart,0x78af000
 #BOARD_KERNEL_SEPARATED_DT := true
+
+BOARD_SECCOMP_POLICY := device/qcom/msm8953_32/seccomp
 
 BOARD_KERNEL_BASE        := 0x80000000
 BOARD_KERNEL_PAGESIZE    := 2048
