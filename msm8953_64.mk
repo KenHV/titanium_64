@@ -51,9 +51,9 @@ PRODUCT_BOOT_JARS += oem-services
 endif
 
 #ifeq ($(strip $(BOARD_HAVE_QCOM_FM)),true)
-PRODUCT_BOOT_JARS += qcom.fmradio
+#PRODUCT_BOOT_JARS += qcom.fmradio
 #endif #BOARD_HAVE_QCOM_FM
-PRODUCT_BOOT_JARS += qcmediaplayer
+#PRODUCT_BOOT_JARS += qcmediaplayer
 
 # default is nosdcard, S/W button enabled in resource
 PRODUCT_CHARACTERISTICS := nosdcard
@@ -150,3 +150,6 @@ else
     PRODUCT_DEFAULT_PROPERTY_OVERRIDES+= \
         ro.logdumpd.enabled=0
 endif
+
+#Keymaster
+PRODUCT_PACKAGES += android.hardware.keymaster@3.0-impl
