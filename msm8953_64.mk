@@ -4,6 +4,7 @@ TARGET_USES_QCOM_BSP := false
 
 ifeq ($(TARGET_USES_AOSP),true)
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := false
+TARGET_DISABLE_DASH := true
 TARGET_USES_QTIC := false
 else
 DEVICE_PACKAGE_OVERLAYS := device/qcom/msm8953_64/overlay
@@ -54,7 +55,6 @@ endif
 #ifeq ($(strip $(BOARD_HAVE_QCOM_FM)),true)
 #PRODUCT_BOOT_JARS += qcom.fmradio
 #endif #BOARD_HAVE_QCOM_FM
-#PRODUCT_BOOT_JARS += qcmediaplayer
 
 # add vendor manifest file
 PRODUCT_COPY_FILES += \
@@ -71,6 +71,9 @@ ifneq (,$(strip $(wildcard $(PRODUCT_RENDERING_ENGINE_REVLIB))))
 #    MULTI_LANG_ZAWGYI := REVERIE
 endif
 
+ifneq ($(TARGET_DISABLE_DASH), true)
+    PRODUCT_BOOT_JARS += qcmediaplayer
+endif
 
 
 #Android EGL implementation
