@@ -142,9 +142,6 @@ endif
 
 TARGET_CRYPTFS_HW_PATH := device/qcom/common/cryptfs_hw
 
-#Enabling IMS Feature
-TARGET_USES_IMS := false
-
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 
 DEX_PREOPT_DEFAULT := nostripping
