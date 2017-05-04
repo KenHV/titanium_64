@@ -47,6 +47,12 @@ BOOTLOADER_PLATFORM := msm8953 # use msm8953 LK configuration
 #MALLOC_IMPL := dlmalloc
 #MALLOC_SVELTE := true
 
+ifeq ($(ENABLE_VENDOR_IMAGE), true)
+TARGET_RECOVERY_FSTAB := device/qcom/msm8953_64/recovery_vendor_variant.fstab
+else
+TARGET_RECOVERY_FSTAB := device/qcom/msm8953_64/recovery.fstab
+endif
+
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x04000000
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x04000000
