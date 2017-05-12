@@ -120,7 +120,7 @@ TARGET_INIT_VENDOR_LIB := libinit_msm
 TARGET_BOARD_SUFFIX := _64
 
 # Enable sensor multi HAL
-#USE_SENSOR_MULTI_HAL := true
+USE_SENSOR_MULTI_HAL := true
 
 #Enable peripheral manager
 TARGET_PER_MGR_ENABLED := true
