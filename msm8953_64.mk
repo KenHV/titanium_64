@@ -14,6 +14,18 @@ TARGET_KERNEL_VERSION := 3.18
 
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 
+# Default vendor configuration.
+ifeq ($(ENABLE_VENDOR_IMAGE),)
+ENABLE_VENDOR_IMAGE := true
+endif
+
+# Disable QTIC until it's brought up in split system/vendor
+# configuration to avoid compilation breakage.
+ifeq ($(ENABLE_VENDOR_IMAGE), true)
+TARGET_USES_QTIC := false
+endif
+
+
 # Enable features in video HAL that can compile only on this platform
 TARGET_USES_MEDIA_EXTENSIONS := true
 
@@ -21,17 +33,17 @@ TARGET_USES_MEDIA_EXTENSIONS := true
 
 # media_profiles and media_codecs xmls for msm8953
 ifeq ($(TARGET_ENABLE_QC_AV_ENHANCEMENTS), true)
-PRODUCT_COPY_FILES += device/qcom/msm8953_32/media/media_profiles_8953.xml:system/etc/media_profiles.xml \
-                      device/qcom/msm8953_32/media/media_codecs_8953.xml:system/etc/media_codecs.xml \
-                      device/qcom/msm8953_32/media/media_codecs_performance_8953.xml:system/etc/media_codecs_performance.xml
+PRODUCT_COPY_FILES += \
+    device/qcom/msm8953_32/media/media_profiles_8953.xml:system/etc/media_profiles.xml \
+    device/qcom/msm8953_32/media/media_profiles_8953.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml \
+    device/qcom/msm8953_32/media/media_codecs_8953.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
+    device/qcom/msm8953_32/media/media_codecs_8953.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml
 endif
 # video seccomp policy files
 # copy to system/vendor as well (since some devices may symlink to system/vendor and not create an actual partition for vendor)
 PRODUCT_COPY_FILES += \
-    device/qcom/msm8953_32/seccomp/mediacodec-seccomp.policy:vendor/etc/seccomp_policy/mediacodec.policy \
-    device/qcom/msm8953_32/seccomp/mediaextractor-seccomp.policy:vendor/etc/seccomp_policy/mediaextractor.policy \
-    device/qcom/msm8953_32/seccomp/mediacodec-seccomp.policy:system/vendor/etc/seccomp_policy/mediacodec.policy \
-    device/qcom/msm8953_32/seccomp/mediaextractor-seccomp.policy:system/vendor/etc/seccomp_policy/mediaextractor.policy
+    device/qcom/msm8953_32/seccomp/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
+    device/qcom/msm8953_32/seccomp/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
 
 PRODUCT_COPY_FILES += device/qcom/msm8953_64/whitelistedapps.xml:system/etc/whitelistedapps.xml \
                       device/qcom/msm8953_64/gamedwhitelist.xml:system/etc/gamedwhitelist.xml
@@ -64,7 +76,7 @@ endif
 
 # add vendor manifest file
 PRODUCT_COPY_FILES += \
-    device/qcom/msm8953_64/vintf.xml:system/vendor/manifest.xml
+    device/qcom/msm8953_64/vintf.xml:$(TARGET_COPY_OUT_VENDOR)/manifest.xml
 
 # default is nosdcard, S/W button enabled in resource
 PRODUCT_CHARACTERISTICS := nosdcard
@@ -118,7 +130,7 @@ PRODUCT_PACKAGES += wcnss_service
 
 # MSM IRQ Balancer configuration file
 PRODUCT_COPY_FILES += \
-    device/qcom/msm8953_64/msm_irqbalance.conf:system/vendor/etc/msm_irqbalance.conf
+    device/qcom/msm8953_64/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
 
 #wlan driver
 PRODUCT_COPY_FILES += \
@@ -188,6 +200,11 @@ PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-service
 
 # Disable Verity boot feature
 PRODUCT_SUPPORTS_VERITY := true
+PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/bootdevice/by-name/system
+ifeq ($(ENABLE_VENDOR_IMAGE), true)
+PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/bootdevice/by-name/vendor
+endif
+
 
 # Enable logdumpd service only for non-perf bootimage
 ifeq ($(findstring perf,$(KERNEL_DEFCONFIG)),)
