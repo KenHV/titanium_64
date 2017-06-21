@@ -62,7 +62,7 @@ PRODUCT_MODEL := msm8953 for arm64
 PRODUCT_BOOT_JARS += tcmiface
 
 ifneq ($(strip $(QCPATH)),)
-#PRODUCT_BOOT_JARS += WfdCommon
+PRODUCT_BOOT_JARS += WfdCommon
 #PRODUCT_BOOT_JARS += com.qti.dpmframework
 #PRODUCT_BOOT_JARS += dpmapi
 #PRODUCT_BOOT_JARS += com.qti.location.sdk
@@ -81,7 +81,7 @@ PRODUCT_COPY_FILES += \
 # default is nosdcard, S/W button enabled in resource
 PRODUCT_CHARACTERISTICS := nosdcard
 
-# When can normal compile this module,  need module owner enable below commands 
+# When can normal compile this module,  need module owner enable below commands
 # font rendering engine feature switch
 -include $(QCPATH)/common/config/rendering-engine.mk
 ifneq (,$(strip $(wildcard $(PRODUCT_RENDERING_ENGINE_REVLIB))))
@@ -142,6 +142,10 @@ PRODUCT_PACKAGES += \
     wpa_supplicant_overlay.conf \
     p2p_supplicant_overlay.conf
 
+#for wlan
+PRODUCT_PACKAGES += \
+    wificond \
+    wifilogd
 # Feature definition files for msm8953
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
