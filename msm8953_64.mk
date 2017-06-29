@@ -22,7 +22,7 @@ endif
 # Disable QTIC until it's brought up in split system/vendor
 # configuration to avoid compilation breakage.
 ifeq ($(ENABLE_VENDOR_IMAGE), true)
-TARGET_USES_QTIC := false
+#TARGET_USES_QTIC := false
 endif
 
 
@@ -37,7 +37,7 @@ PRODUCT_COPY_FILES += \
     device/qcom/msm8953_32/media/media_profiles_8953.xml:system/etc/media_profiles.xml \
     device/qcom/msm8953_32/media/media_profiles_8953.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml \
     device/qcom/msm8953_32/media/media_codecs_8953.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
-    device/qcom/msm8953_32/media/media_codecs_8953.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml
+    device/qcom/msm8953_32/media/media_codecs_performance_8953.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml
 endif
 # video seccomp policy files
 # copy to system/vendor as well (since some devices may symlink to system/vendor and not create an actual partition for vendor)
