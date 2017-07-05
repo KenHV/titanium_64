@@ -27,6 +27,8 @@ ifeq ($(ENABLE_VENDOR_IMAGE), true)
 #TARGET_USES_QTIC := false
 endif
 
+# Default A/B configuration.
+ENABLE_AB ?= false
 
 # Enable features in video HAL that can compile only on this platform
 TARGET_USES_MEDIA_EXTENSIONS := true
@@ -255,3 +257,16 @@ PRODUCT_PACKAGES += android.hardware.gatekeeper@1.0-impl \
 endif
 
 PRODUCT_PROPERTY_OVERRIDES += rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
+
+ifeq ($(ENABLE_AB),true)
+#A/B related packages
+PRODUCT_PACKAGES += update_engine \
+                   update_engine_client \
+                   update_verifier \
+                   bootctrl.msm8953 \
+                   brillo_update_payload \
+                   android.hardware.boot@1.0-impl \
+                   android.hardware.boot@1.0-service
+#Boot control HAL test app
+PRODUCT_PACKAGES_DEBUG += bootctl
+endif
