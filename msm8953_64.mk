@@ -200,6 +200,11 @@ PRODUCT_PACKAGES += \
  PRODUCT_COPY_FILES += \
      device/qcom/msm8953_64/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf
 
+# Vibrator
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator@1.0-impl \
+    android.hardware.vibrator@1.0-service
+
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power@1.0-service \
