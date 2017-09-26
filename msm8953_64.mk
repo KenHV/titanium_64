@@ -99,6 +99,14 @@ ifneq ($(TARGET_DISABLE_DASH), true)
     PRODUCT_BOOT_JARS += qcmediaplayer
 endif
 
+#
+# system prop for opengles version
+#
+# 196608 is decimal for 0x30000 to report major/minor versions as 3/0
+# 196609 is decimal for 0x30001 to report major/minor versions as 3/1
+# 196610 is decimal for 0x30002 to report major/minor versions as 3/2
+PRODUCT_PROPERTY_OVERRIDES += \
+     ro.opengles.version=196610
 
 #Android EGL implementation
 PRODUCT_PACKAGES += libGLES_android
