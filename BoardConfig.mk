@@ -98,6 +98,11 @@ endif
 # Enable MDTP during recovery
 TARGET_USE_MDTP := true
 
+# Enable kaslr seed support
+ifeq ($(TARGET_KERNEL_VERSION), 4.9)
+KASLRSEED_SUPPORT := true
+endif
+
 # Enable suspend during charger mode
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
