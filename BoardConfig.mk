@@ -116,7 +116,11 @@ TARGET_USES_COLOR_METADATA := true
 
 TARGET_NO_RPC := true
 
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_hsl_uart,0x78af000
+ifeq ($(strip $(TARGET_KERNEL_VERSION)), 4.9)
+    BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200,n8 androidboot.console=ttyMSM0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_serial_dm,0x78af000 androidboot.selinux=permissive
+else ifeq ($(strip $(TARGET_KERNEL_VERSION)), 3.18)
+    BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_hsl_uart,0x78af000
+endif
 #BOARD_KERNEL_SEPARATED_DT := true
 
 BOARD_SECCOMP_POLICY := device/qcom/msm8953_32/seccomp
