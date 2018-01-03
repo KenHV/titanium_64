@@ -11,7 +11,15 @@ BOARD_HAVE_QCOM_FM := true
 
 TARGET_USES_NQ_NFC := true
 
-TARGET_KERNEL_VERSION := 3.18
+ifneq ($(wildcard kernel/msm-3.18),)
+    TARGET_KERNEL_VERSION := 3.18
+    $(warning "Build with 3.18 kernel.")
+else ifneq ($(wildcard kernel/msm-4.9),)
+    TARGET_KERNEL_VERSION := 4.9
+    $(warning "Build with 4.9 kernel")
+else
+    $(warning "Unknown kernel")
+endif
 
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 

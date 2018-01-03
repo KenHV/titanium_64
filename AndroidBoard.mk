@@ -18,13 +18,23 @@ endif
 #----------------------------------------------------------------------
 # Compile Linux Kernel
 #----------------------------------------------------------------------
+
 ifeq ($(KERNEL_DEFCONFIG),)
-    ifeq ($(TARGET_BUILD_VARIANT),user)
-      KERNEL_DEFCONFIG := msmcortex-perf_defconfig
-    else
-      KERNEL_DEFCONFIG := msmcortex_defconfig
+    ifneq ($(wildcard kernel/msm-3.18),)
+        ifeq ($(TARGET_BUILD_VARIANT),user)
+          KERNEL_DEFCONFIG := msmcortex-perf_defconfig
+        else
+          KERNEL_DEFCONFIG := msmcortex_defconfig
+        endif
+    else ifneq ($(wildcard kernel/msm-4.9),)
+        ifeq ($(TARGET_BUILD_VARIANT),user)
+          KERNEL_DEFCONFIG := msm8953-perf_defconfig
+        else
+          KERNEL_DEFCONFIG := msm8953_defconfig
+        endif
     endif
 endif
+
 ifeq ($(TARGET_KERNEL_SOURCE),)
      TARGET_KERNEL_SOURCE := kernel
 endif
