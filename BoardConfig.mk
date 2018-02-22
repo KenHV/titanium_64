@@ -136,6 +136,7 @@ BOARD_VENDOR_KERNEL_MODULES := \
     $(KERNEL_MODULES_OUT)/audio_wsa881x.ko \
     $(KERNEL_MODULES_OUT)/audio_wsa881x_analog.ko \
     $(KERNEL_MODULES_OUT)/audio_platform.ko \
+    $(KERNEL_MODULES_OUT)/audio_cpe_lsm.ko \
     $(KERNEL_MODULES_OUT)/audio_hdmi.ko \
     $(KERNEL_MODULES_OUT)/audio_stub.ko \
     $(KERNEL_MODULES_OUT)/audio_wcd9xxx.ko \
