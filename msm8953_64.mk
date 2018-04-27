@@ -172,7 +172,7 @@ PRODUCT_COPY_FILES += \
 # MSM IRQ Balancer configuration file
 PRODUCT_COPY_FILES += \
     device/qcom/msm8953_64/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf \
-    device/qcom/msm8953_64/msm_irqbalance_sdm632.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance_sdm632.conf
+    device/qcom/msm8953_64/msm_irqbalance_little_big.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance_little_big.conf
 #wlan driver
 PRODUCT_COPY_FILES += \
     device/qcom/msm8953_64/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini \
