@@ -38,7 +38,18 @@ endif
 ifeq ($(TARGET_KERNEL_SOURCE),)
      TARGET_KERNEL_SOURCE := kernel
 endif
+
+ifeq ($(TARGET_KERNEL_VERSION), 4.9)
+DTC := $(HOST_OUT_EXECUTABLES)/dtc$(HOST_EXECUTABLE_SUFFIX)
+
+TARGET_KERNEL_MAKE_ENV := DTC_EXT=dtc$(HOST_EXECUTABLE_SUFFIX)
+TARGET_KERNEL_MAKE_ENV += CONFIG_BUILD_ARM64_DT_OVERLAY=y
+endif
+
 include $(TARGET_KERNEL_SOURCE)/AndroidKernel.mk
+ifeq ($(TARGET_KERNEL_VERSION), 4.9)
+$(TARGET_PREBUILT_KERNEL): $(DTC)
+endif
 
 $(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
 	$(transform-prebuilt-to-target)
@@ -73,10 +84,20 @@ include $(CLEAR_VARS)
 LOCAL_MODULE       := fstab.qcom
 LOCAL_MODULE_TAGS  := optional eng
 LOCAL_MODULE_CLASS := ETC
-ifeq ($(ENABLE_AB), true)
-  LOCAL_SRC_FILES    := fstab_AB_variant.qti
+ifneq ($(wildcard kernel/msm-3.18),)
+    ifeq ($(ENABLE_AB), true)
+      LOCAL_SRC_FILES    := fstabs-3.18/fstab_AB_variant.qti
+    else
+      LOCAL_SRC_FILES    := fstabs-3.18/fstab_non_AB_variant.qti
+    endif
+else ifneq ($(wildcard kernel/msm-4.9),)
+    ifeq ($(ENABLE_AB), true)
+      LOCAL_SRC_FILES    := fstabs-4.9/fstab_AB_variant.qti
+    else
+      LOCAL_SRC_FILES    := fstabs-4.9/fstab_non_AB_variant.qti
+    endif
 else
-  LOCAL_SRC_FILES    := fstab_non_AB_variant.qti
+    $(warning "Unknown kernel")
 endif
 LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR_ETC)
 include $(BUILD_PREBUILT)
