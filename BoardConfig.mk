@@ -62,6 +62,8 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x04000000
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_msm
+# Enable System As Root even for non-A/B from P onwards
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 endif
 
 ifneq ($(wildcard kernel/msm-3.18),)
