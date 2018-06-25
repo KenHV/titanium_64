@@ -14,7 +14,12 @@ endif
 
 DEVICE_PACKAGE_OVERLAYS := device/qcom/msm8953_64/overlay
 
-TARGET_USES_NQ_NFC := false
+TARGET_USES_NQ_NFC := true
+
+ifeq ($(TARGET_USES_NQ_NFC),true)
+PRODUCT_COPY_FILES += \
+    device/qcom/common/nfc/libnfc-brcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci.conf
+endif
 
 ifneq ($(wildcard kernel/msm-3.18),)
     TARGET_KERNEL_VERSION := 3.18
