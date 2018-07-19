@@ -222,7 +222,7 @@ TARGET_PER_MGR_ENABLED := true
 #Enable HW based full disk encryption
 TARGET_HW_DISK_ENCRYPTION := true
 
-TARGET_CRYPTFS_HW_PATH := device/qcom/common/cryptfs_hw
+TARGET_HW_DISK_ENCRYPTION_PERF := false
 
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 
