@@ -74,9 +74,6 @@ PRODUCT_COPY_FILES += \
     device/qcom/msm8953_32/seccomp/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
     device/qcom/msm8953_32/seccomp/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
 
-PRODUCT_COPY_FILES += device/qcom/msm8953_64/whitelistedapps.xml:system/etc/whitelistedapps.xml \
-                      device/qcom/msm8953_64/gamedwhitelist.xml:system/etc/gamedwhitelist.xml
-
 PRODUCT_PROPERTY_OVERRIDES += \
            dalvik.vm.heapminfree=4m \
            dalvik.vm.heapstartsize=16m
