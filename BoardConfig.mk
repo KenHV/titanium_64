@@ -260,3 +260,11 @@ BOARD_VNDK_VERSION := current
 endif
 
 TARGET_ENABLE_MEDIADRM_64 := true
+
+
+#################################################################################
+# This is the End of BoardConfig.mk file.
+# Now, Pickup other split Board.mk files:
+#################################################################################
+-include vendor/qcom/defs/board-defs/legacy/*.mk
+#################################################################################
