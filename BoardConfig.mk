@@ -177,9 +177,9 @@ BOARD_VENDOR_KERNEL_MODULES := \
 endif
 
 ifeq ($(strip $(TARGET_KERNEL_VERSION)), 4.9)
-    BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200,n8 androidboot.console=ttyMSM0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_serial_dm,0x78af000 firmware_class.path=/vendor/firmware_mnt/image androidboot.usbconfigfs=true loop.max_part=7
+    BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200,n8 androidboot.console=ttyMSM0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_serial_dm,0x78af000 androidboot.usbconfigfs=true loop.max_part=7
 else ifeq ($(strip $(TARGET_KERNEL_VERSION)), 3.18)
-    BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_hsl_uart,0x78af000 firmware_class.path=/vendor/firmware_mnt/image loop.max_part=7
+    BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_hsl_uart,0x78af000 loop.max_part=7
 endif
 #BOARD_KERNEL_SEPARATED_DT := true
 
@@ -192,7 +192,7 @@ BOARD_RAMDISK_OFFSET     := 0x02000000
 
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := $(shell pwd)/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-androidkernel-
 TARGET_USES_UNCOMPRESSED_KERNEL := false
 
 # Shader cache config options
@@ -260,3 +260,11 @@ BOARD_VNDK_VERSION := current
 endif
 
 TARGET_ENABLE_MEDIADRM_64 := true
+
+
+#################################################################################
+# This is the End of BoardConfig.mk file.
+# Now, Pickup other split Board.mk files:
+#################################################################################
+-include vendor/qcom/defs/board-defs/legacy/*.mk
+#################################################################################

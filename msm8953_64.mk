@@ -74,9 +74,6 @@ PRODUCT_COPY_FILES += \
     device/qcom/msm8953_32/seccomp/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
     device/qcom/msm8953_32/seccomp/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
 
-PRODUCT_COPY_FILES += device/qcom/msm8953_64/whitelistedapps.xml:system/etc/whitelistedapps.xml \
-                      device/qcom/msm8953_64/gamedwhitelist.xml:system/etc/gamedwhitelist.xml
-
 PRODUCT_PROPERTY_OVERRIDES += \
            dalvik.vm.heapminfree=4m \
            dalvik.vm.heapstartsize=16m
@@ -386,3 +383,11 @@ ifeq ($(strip $(TARGET_KERNEL_VERSION)), 3.18)
     ENABLE_EXTRA_VENDOR_LIBS := true
     PRODUCT_PACKAGES += vendor-extra-libs
 endif
+
+
+###################################################################################
+# This is the End of target.mk file.
+# Now, Pickup other split product.mk files:
+###################################################################################
+$(call inherit-product-if-exists, vendor/qcom/defs/product-defs/legacy/*.mk)
+###################################################################################
