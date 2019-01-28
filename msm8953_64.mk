@@ -358,6 +358,15 @@ PRODUCT_PACKAGES += update_engine \
                    android.hardware.boot@1.0-service
 #Boot control HAL test app
 PRODUCT_PACKAGES_DEBUG += bootctl
+
+PRODUCT_STATIC_BOOT_CONTROL_HAL := \
+  bootctrl.msm8953 \
+  librecovery_updater_msm \
+  libz \
+  libcutils
+
+PRODUCT_PACKAGES += \
+  update_engine_sideload
 endif
 
 TARGET_MOUNT_POINTS_SYMLINKS := false
