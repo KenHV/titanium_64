@@ -1,2 +1,5 @@
 PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/msm8953_64.mk
+
+COMMON_LUNCH_CHOICES := \
+    msm8953_64-userdebug
