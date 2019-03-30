@@ -6,6 +6,8 @@
 TARGET_BOARD_PLATFORM := msm8953
 # This value will be shown on fastboot menu
 TARGET_BOOTLOADER_BOARD_NAME := msm8953
+# TODO(b/124534788): Temporarily allow eng and debug LOCAL_MODULE_TAGS
+BUILD_BROKEN_ENG_DEBUG_TAGS:=true
 
 TARGET_COMPILE_WITH_MSM_KERNEL := true
 TARGET_KERNEL_APPEND_DTB := true
