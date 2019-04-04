@@ -99,7 +99,7 @@ ifneq ($(strip $(QCPATH)),)
 #PRODUCT_BOOT_JARS += dpmapi
 #PRODUCT_BOOT_JARS += com.qti.location.sdk
 #Android oem shutdown hook
-PRODUCT_BOOT_JARS += oem-services
+#PRODUCT_BOOT_JARS += oem-services
 endif
 
 DEVICE_MANIFEST_FILE := device/qcom/msm8953_64/manifest.xml
