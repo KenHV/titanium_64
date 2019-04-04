@@ -8,13 +8,15 @@ TARGET_USES_AOSP := false
 TARGET_USES_AOSP_FOR_AUDIO := false
 TARGET_USES_QCOM_BSP := false
 
+TARGET_SYSTEM_PROP := device/qcom/msm8953_64/system.prop
+
 ifeq ($(TARGET_USES_AOSP),true)
 TARGET_DISABLE_DASH := true
 endif
 
 DEVICE_PACKAGE_OVERLAYS := device/qcom/msm8953_64/overlay
 
-TARGET_USES_NQ_NFC := true
+TARGET_USES_NQ_NFC := false
 
 ifeq ($(TARGET_USES_NQ_NFC),true)
 PRODUCT_COPY_FILES += \
@@ -92,7 +94,7 @@ KERNEL_MODULES_INSTALL := dlkm
 KERNEL_MODULES_OUT := out/target/product/$(PRODUCT_NAME)/$(KERNEL_MODULES_INSTALL)/lib/modules
 
 ifneq ($(strip $(QCPATH)),)
-PRODUCT_BOOT_JARS += WfdCommon
+#PRODUCT_BOOT_JARS += WfdCommon
 #PRODUCT_BOOT_JARS += com.qti.dpmframework
 #PRODUCT_BOOT_JARS += dpmapi
 #PRODUCT_BOOT_JARS += com.qti.location.sdk
@@ -139,6 +141,9 @@ PRODUCT_PACKAGES += libGLES_android
 
 # Audio configuration file
 -include $(TOPDIR)hardware/qcom/audio/configs/msm8953/msm8953.mk
+
+USE_CUSTOM_AUDIO_POLICY := 0
+USE_LIB_PROCESS_GROUP := true
 
 #Audio DLKM
 ifeq ($(TARGET_KERNEL_VERSION), 4.9)
@@ -389,7 +394,7 @@ endif
 
 ifeq ($(strip $(TARGET_KERNEL_VERSION)), 3.18)
     # Enable extra vendor libs
-    ENABLE_EXTRA_VENDOR_LIBS := true
+    ENABLE_EXTRA_VENDOR_LIBS := false
     PRODUCT_PACKAGES += vendor-extra-libs
 endif
 
@@ -400,3 +405,9 @@ endif
 ###################################################################################
 $(call inherit-product-if-exists, vendor/qcom/defs/product-defs/legacy/*.mk)
 ###################################################################################
+
+# For bringup
+WLAN_BRINGUP_NEW_SP := true
+DISP_BRINGUP_NEW_SP := true
+CAM_BRINGUP_NEW_SP := true
+SEC_USERSPACE_BRINGUP_NEW_SP := true
