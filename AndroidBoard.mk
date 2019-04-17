@@ -49,9 +49,9 @@ TARGET_KERNEL_MAKE_ENV += CONFIG_BUILD_ARM64_DT_OVERLAY=y
 endif
 
 TEMP_TOP=$(shell pwd)
-TARGET_KERNEL_MAKE_ENV += HOSTCC=$(TEMP_TOP)/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.15-4.8/bin/x86_64-linux-gcc
-TARGET_KERNEL_MAKE_ENV += HOSTAR=$(TEMP_TOP)/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.15-4.8/bin/x86_64-linux-ar
-TARGET_KERNEL_MAKE_ENV += HOSTLD=$(TEMP_TOP)/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.15-4.8/bin/x86_64-linux-ld
+TARGET_KERNEL_MAKE_ENV += HOSTCC=$(TEMP_TOP)/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8/bin/x86_64-linux-gcc
+TARGET_KERNEL_MAKE_ENV += HOSTAR=$(TEMP_TOP)/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8/bin/x86_64-linux-ar
+TARGET_KERNEL_MAKE_ENV += HOSTLD=$(TEMP_TOP)/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8/bin/x86_64-linux-ld
 TARGET_KERNEL_MAKE_ENV += HOSTCFLAGS="-I/usr/include -I/usr/include/x86_64-linux-gnu -L/usr/lib -L/usr/lib/x86_64-linux-gnu"
 TARGET_KERNEL_MAKE_ENV += HOSTLDFLAGS="-L/usr/lib -L/usr/lib/x86_64-linux-gnu"
 
@@ -172,7 +172,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE       := hostapd_default.conf
 LOCAL_MODULE_TAGS  := optional
 LOCAL_MODULE_CLASS := ETC
-LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)/hostapd
+LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR_ETC)/hostapd
 LOCAL_SRC_FILES    := hostapd.conf
 include $(BUILD_PREBUILT)
 
@@ -180,7 +180,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE       := hostapd.accept
 LOCAL_MODULE_TAGS  := optional
 LOCAL_MODULE_CLASS := ETC
-LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)/hostapd
+LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR_ETC)/hostapd
 LOCAL_SRC_FILES    := hostapd.accept
 include $(BUILD_PREBUILT)
 
@@ -188,7 +188,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE       := hostapd.deny
 LOCAL_MODULE_TAGS  := optional
 LOCAL_MODULE_CLASS := ETC
-LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)/hostapd
+LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR_ETC)/hostapd
 LOCAL_SRC_FILES    := hostapd.deny
 include $(BUILD_PREBUILT)
 
@@ -216,3 +216,10 @@ endif
 # extra images
 #----------------------------------------------------------------------
 include device/qcom/common/generate_extra_images.mk
+
+#----------------------------------------------------------------------
+# override default make with prebuilt make path (if any)
+#----------------------------------------------------------------------
+ifneq (, $(wildcard $(shell pwd)/prebuilts/build-tools/linux-x86/bin/make))
+    MAKE := $(shell pwd)/prebuilts/build-tools/linux-x86/bin/$(MAKE)
+endif
