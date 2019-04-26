@@ -398,6 +398,9 @@ ifeq ($(strip $(TARGET_KERNEL_VERSION)), 3.18)
     PRODUCT_PACKAGES += vendor-extra-libs
 endif
 
+# Enable telephpony ims feature
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.telephony.ims.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.ims.xml
 
 ###################################################################################
 # This is the End of target.mk file.
