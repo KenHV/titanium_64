@@ -84,7 +84,7 @@ $(call inherit-product, device/qcom/common/common64.mk)
 
 PRODUCT_NAME := msm8953_64
 PRODUCT_DEVICE := msm8953_64
-PRODUCT_BRAND := Android
+PRODUCT_BRAND := qti
 PRODUCT_MODEL := msm8953 for arm64
 
 PRODUCT_BOOT_JARS += tcmiface
