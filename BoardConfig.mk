@@ -18,6 +18,7 @@ TARGET_BOOTLOADER_BOARD_NAME := msm8953
 BUILD_BROKEN_ENG_DEBUG_TAGS:=true
 
 TARGET_COMPILE_WITH_MSM_KERNEL := true
+# Enable appended dtb
 TARGET_KERNEL_APPEND_DTB := true
 BOARD_USES_GENERIC_AUDIO := true
 
@@ -269,9 +270,18 @@ BOARD_SYSTEMSDK_VERSIONS :=28
 BOARD_VNDK_VERSION := current
 endif
 
+ifeq ($(BOARD_KERNEL_SEPARATED_DTBO), true)
 # Set Header version for bootimage
+ifneq ($(strip $(TARGET_KERNEL_APPEND_DTB)),true)
+#Enable dtb in boot image and Set Header version
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+BOARD_BOOTIMG_HEADER_VERSION := 2
+else
 BOARD_BOOTIMG_HEADER_VERSION := 1
+endif
+
 BOARD_MKBOOTIMG_ARGS := --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
+endif
 
 ifneq ($(ENABLE_AB),true)
   ifeq ($(BOARD_KERNEL_SEPARATED_DTBO),true)
