@@ -84,7 +84,7 @@ $(call inherit-product, device/qcom/common/common64.mk)
 
 PRODUCT_NAME := msm8953_64
 PRODUCT_DEVICE := msm8953_64
-PRODUCT_BRAND := Android
+PRODUCT_BRAND := qti
 PRODUCT_MODEL := msm8953 for arm64
 
 PRODUCT_BOOT_JARS += tcmiface
@@ -94,7 +94,7 @@ KERNEL_MODULES_INSTALL := dlkm
 KERNEL_MODULES_OUT := out/target/product/$(PRODUCT_NAME)/$(KERNEL_MODULES_INSTALL)/lib/modules
 
 ifneq ($(strip $(QCPATH)),)
-#PRODUCT_BOOT_JARS += WfdCommon
+PRODUCT_BOOT_JARS += WfdCommon
 #PRODUCT_BOOT_JARS += com.qti.dpmframework
 #PRODUCT_BOOT_JARS += dpmapi
 #PRODUCT_BOOT_JARS += com.qti.location.sdk
