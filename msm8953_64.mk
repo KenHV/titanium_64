@@ -1,7 +1,32 @@
 ALLOW_MISSING_DEPENDENCIES=true
+
+# Default A/B configuration.
+ENABLE_AB ?= false
+
+# Dynamic-partition disabled by default
+BOARD_DYNAMIC_PARTITION_ENABLE ?= false
+
+ifeq ($(strip $(BOARD_DYNAMIC_PARTITION_ENABLE)),true)
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+PRODUCT_PACKAGES += fastbootd
+ifeq ($(ENABLE_AB), true)
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/fstabs-4.9/fstab_AB_dynamic_partition_variant.qti:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
+else
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/fstabs-4.9/fstab_non_AB_dynamic_partition_variant.qti:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
+endif
+endif
+
 # Enable AVB 2.0
 ifneq ($(wildcard kernel/msm-4.9),)
 BOARD_AVB_ENABLE := true
+ifeq ($(strip $(BOARD_DYNAMIC_PARTITION_ENABLE)),true)
+# enable vbmeta_system
+BOARD_AVB_VBMETA_SYSTEM := system
+BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
+BOARD_AVB_VBMETA_SYSTEM_ALGORITHM := SHA256_RSA2048
+BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
+BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 2
+endif
 endif
 
 TARGET_USES_AOSP := false
@@ -46,8 +71,6 @@ ifeq ($(ENABLE_VENDOR_IMAGE), true)
 #TARGET_USES_QTIC := false
 endif
 
-# Default A/B configuration.
-ENABLE_AB ?= false
 
 # Enable features in video HAL that can compile only on this platform
 TARGET_USES_MEDIA_EXTENSIONS := true
@@ -103,6 +126,9 @@ PRODUCT_BOOT_JARS += WfdCommon
 endif
 
 DEVICE_MANIFEST_FILE := device/qcom/msm8953_64/manifest.xml
+ifeq ($(ENABLE_AB), true)
+DEVICE_MANIFEST_FILE += device/qcom/msm8953_64/manifest_ab.xml
+endif
 DEVICE_MATRIX_FILE   := device/qcom/common/compatibility_matrix.xml
 DEVICE_FRAMEWORK_MANIFEST_FILE := device/qcom/msm8953_64/framework_manifest.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
@@ -358,9 +384,12 @@ PRODUCT_PACKAGES += update_engine \
                    update_engine_client \
                    update_verifier \
                    bootctrl.msm8953 \
-                   brillo_update_payload \
                    android.hardware.boot@1.0-impl \
                    android.hardware.boot@1.0-service
+
+PRODUCT_HOST_PACKAGES += \
+    brillo_update_payload
+
 #Boot control HAL test app
 PRODUCT_PACKAGES_DEBUG += bootctl
 

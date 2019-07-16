@@ -89,6 +89,19 @@ LOCAL_SRC_FILES    := $(LOCAL_MODULE)
 LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)
 include $(BUILD_PREBUILT)
 
+ifeq ($(strip $(BOARD_DYNAMIC_PARTITION_ENABLE)),true)
+include $(CLEAR_VARS)
+LOCAL_MODULE       := fstab.qcom
+LOCAL_MODULE_TAGS  := optional
+LOCAL_MODULE_CLASS := ETC
+    ifeq ($(ENABLE_AB), true)
+      LOCAL_SRC_FILES := fstabs-4.9/fstab_AB_dynamic_partition_variant.qti
+    else
+      LOCAL_SRC_FILES := fstabs-4.9/fstab_non_AB_dynamic_partition_variant.qti
+    endif
+LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR_ETC)
+include $(BUILD_PREBUILT)
+else
 include $(CLEAR_VARS)
 LOCAL_MODULE       := fstab.qcom
 LOCAL_MODULE_TAGS  := optional
@@ -110,6 +123,7 @@ else
 endif
 LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR_ETC)
 include $(BUILD_PREBUILT)
+endif
 
 include $(CLEAR_VARS)
 LOCAL_MODULE       := gpio-keys.kl
