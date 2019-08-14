@@ -175,7 +175,6 @@ PRODUCT_PACKAGES += libGLES_android
 # Audio configuration file
 -include $(TOPDIR)hardware/qcom/audio/configs/msm8953/msm8953.mk
 
-USE_CUSTOM_AUDIO_POLICY := 0
 USE_LIB_PROCESS_GROUP := true
 
 #Audio DLKM
