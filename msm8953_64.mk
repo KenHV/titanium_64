@@ -111,7 +111,8 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
            dalvik.vm.heapminfree=4m \
-           dalvik.vm.heapstartsize=16m
+           dalvik.vm.heapstartsize=16m \
+           vendor.vidc.disable.split.mode=1
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product, device/qcom/common/common64.mk)
 
