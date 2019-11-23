@@ -112,7 +112,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
            dalvik.vm.heapminfree=4m \
            dalvik.vm.heapstartsize=16m \
-           vendor.vidc.disable.split.mode=1
+           vendor.vidc.disable.split.mode=1 \
+           vendor.vidc.enc.disable.pq=true
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product, device/qcom/common/common64.mk)
 
@@ -140,6 +141,18 @@ DEVICE_MANIFEST_FILE := device/qcom/msm8953_64/manifest.xml
 ifeq ($(ENABLE_AB), true)
 DEVICE_MANIFEST_FILE += device/qcom/msm8953_64/manifest_ab.xml
 endif
+
+ifeq ($(strip $(TARGET_KERNEL_VERSION)), 3.18)
+    DEVICE_MANIFEST_FILE += device/qcom/msm8953_64/manifest_target_level_2.xml
+endif
+ifeq ($(TARGET_KERNEL_VERSION), 4.9)
+    ifeq ($(strip $(BOARD_DYNAMIC_PARTITION_ENABLE)),true)
+        DEVICE_MANIFEST_FILE += device/qcom/msm8953_64/manifest_target_level_4.xml
+    else
+        DEVICE_MANIFEST_FILE += device/qcom/msm8953_64/manifest_target_level_3.xml
+    endif
+endif
+
 DEVICE_MATRIX_FILE   := device/qcom/common/compatibility_matrix.xml
 DEVICE_FRAMEWORK_MANIFEST_FILE := device/qcom/msm8953_64/framework_manifest.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
@@ -228,7 +241,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.graphics.mapper@2.0-impl-2.1 \
     android.hardware.graphics.composer@2.1-impl \
     android.hardware.graphics.composer@2.1-service \
     android.hardware.memtrack@1.0-impl \
@@ -448,6 +461,7 @@ ifeq ($(strip $(TARGET_KERNEL_VERSION)), 3.18)
     # Enable extra vendor libs
     ENABLE_EXTRA_VENDOR_LIBS := true
     PRODUCT_PACKAGES += vendor-extra-libs
+    $(call inherit-product, build/make/target/product/product_launched_with_o_mr1.mk)
 endif
 
 # Enable telephpony ims feature
